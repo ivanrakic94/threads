@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Timer;
 
+import javax.swing.JTextArea;
+
 import music.Performance;
 import music.Singer;
+import music.Solo;
 import music.Song;
 import music.Synchronizer;
 import music.Voice;
@@ -23,6 +26,7 @@ public class Test {
     private Performance performance;
     private Singer bbk;
     private Singer bono;
+    private Solo solo;
     
     public Test() {
         // TODO Auto-generated constructor stub
@@ -37,7 +41,7 @@ public class Test {
         
         song = new Song("When Love Comes to Town", lyrics);
         performance = new Performance(song, 1000);
-        Synchronizer synch = new Synchronizer(true);
+        Synchronizer synch = new Synchronizer(true, false);
         boolean stopIt = false;
         
 //        bbk = new Singer("B.B. King", Voice.LEAD, performance);
@@ -45,6 +49,7 @@ public class Test {
         
         bbk = new Singer("B.B. King", Voice.LEAD, performance, stopIt, synch);
         bono = new Singer("Bono", Voice.BACKING, performance, stopIt, synch);
+        solo = new Solo("B. B. King", performance, synch, stopIt);
     }
     
     public synchronized void simpleWait() {
@@ -105,10 +110,53 @@ public class Test {
         initialize();
         bbk.start();
         bono.start();
-        
-        IN.nextLine();
-        bbk.setStopIt(true);
-        bono.setStopIt(true);
+        solo.start();        
     }
+    
+    public void stop() {
+    	bbk.setStopIt(true);
+    	bono.setStopIt(true);
+    	solo.setStop(true);
+    }
+
+	public Song getSong() {
+		return song;
+	}
+
+	public void setSong(Song song) {
+		this.song = song;
+	}
+
+	public Performance getPerformance() {
+		return performance;
+	}
+
+	public void setPerformance(Performance performance) {
+		this.performance = performance;
+	}
+
+	public Singer getBbk() {
+		return bbk;
+	}
+
+	public void setBbk(Singer bbk) {
+		this.bbk = bbk;
+	}
+
+	public Singer getBono() {
+		return bono;
+	}
+
+	public void setBono(Singer bono) {
+		this.bono = bono;
+	}
+
+	public Solo getSolo() {
+		return solo;
+	}
+
+	public void setSolo(Solo solo) {
+		this.solo = solo;
+	}
 
 }

@@ -23,7 +23,7 @@ public class ShoutTimerTask extends TimerTask {
     @Override
     public void run() {
         System.out.println();
-        System.out.println("Yeah!)");
+        System.out.println("Yeah!");
         System.out.println();
         timer.cancel();
         timer.purge();
